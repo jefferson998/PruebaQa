@@ -99,3 +99,6 @@ Imagenes de Reporte Allure
 ![Reporte Allure](./allure-report.png)
 ![Reporte Allure](./allure-report-2.png)
 ![Reporte Allure](./allure-report-3.png)
+
+Pipeline de GitHub Actions
+![Pipeline](./Pipeline-trigger.png)
