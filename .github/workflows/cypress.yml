@@ -1,0 +1,117 @@
+name: Cypress Tests & Allure Report
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: 'Prueba a ejecutar'
+        required: true
+        default: 'todas'
+        type: choice
+        options:
+          - todas
+          - login
+          - compra
+          - api
+          - api-crud-persistente
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create cypress.env.json from secrets
+        run: |
+          cat <<EOF > cypress.env.json
+          {
+            "reqresApiKey": "${{ secrets.REQRES_API_KEY }}",
+            "reqresProjectId": "${{ secrets.REQRES_PROJECT_ID }}",
+            "reqresEnv": "${{ secrets.REQRES_ENV }}",
+            "apiBaseUrl": "${{ secrets.API_BASE_URL }}",
+            "apiCollectionsUrl": "${{ secrets.API_COLLECTIONS_URL }}",
+            "baseUrl": "${{ secrets.BASE_URL }}"
+          }
+          EOF
+
+      - name: Run Cypress tests with Allure
+        run: |
+          SPEC_INPUT="${{ github.event.inputs.spec }}"
+          if [ -z "$SPEC_INPUT" ] || [ "$SPEC_INPUT" = "todas" ]; then
+            npm run test
+          else
+            case "$SPEC_INPUT" in
+              login)
+                npm run test:login
+                ;;
+              compra)
+                npx cypress run --spec "cypress/e2e/features/compra.feature"
+                ;;
+              api)
+                npm run test:api
+                ;;
+              api-crud-persistente)
+                npx cypress run --spec "cypress/e2e/features/api-crud-persistente.feature"
+                ;;
+            esac
+          fi
+        continue-on-error: true
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos/
+          retention-days: 30
+
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/
+          retention-days: 30
+
+      - name: Generate Allure report
+        run: npm run allure:generate
+
+      - name: Upload Allure report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          retention-days: 30
+
+      - name: Deploy Allure report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          publish_branch: gh-pages
+          destination_dir: allure-report
+          keep_files: false
+          commit_message: 'ci: update Allure report [${{ github.run_number }}]'

@@ -1,0 +1,26 @@
+{
+  "name": "makers-qa-automation",
+  "version": "1.0.0",
+  "description": "Prueba Tecnica Makers - Automatizacion Cypress + Cucumber + Allure (SauceDemo Login Smoke Test y API reqres.in)",
+  "scripts": {
+    "cy:open": "cypress open",
+    "test": "cypress run",
+    "test:login": "cypress run --spec \"cypress/e2e/features/login.feature\"",
+    "test:api": "cypress run --spec \"cypress/e2e/features/api.feature\"",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "report": "npm run test && npm run allure:generate && npm run allure:open",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^24.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "@types/cypress": "^0.1.6",
+    "@types/node": "^22.10.2",
+    "allure-commandline": "^2.34.0",
+    "cypress": "^15.18.0",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.2"
+  }
+}

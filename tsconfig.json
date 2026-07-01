@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "lib": ["ES2021", "DOM"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "types": ["cypress", "node", "@shelex/cypress-allure-plugin"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "isolatedModules": false,
+    "baseUrl": ".",
+    "paths": {
+      "@badeball/cypress-cucumber-preprocessor/*": [
+        "./node_modules/@badeball/cypress-cucumber-preprocessor/dist/subpath-entrypoints/*"
+      ]
+    }
+  },
+  "include": [
+    "cypress/**/*.ts",
+    "cypress.config.ts",
+    "node_modules/@shelex/cypress-allure-plugin/reporter",
+    "node_modules/cypress"
+  ]
+}
