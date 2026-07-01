@@ -83,7 +83,7 @@ Los resultados crudos se guardan en `allure-results/` y el reporte HTML en `allu
 - **Tags** (`@happy-path`, `@alterno`, `@negativo`, `@smoke`) para poder filtrar ejecucion por tipo de prueba.
 - **Independencia de pruebas**: cada escenario visita el login desde cero (Background) o crea su propio usuario en la API, sin depender del orden de ejecucion.
 - **Reporte Allure**: trazabilidad de ejecucion, evidencias por paso y agrupacion por features/tags para el equipo y stakeholders.
-- **Datos como variables de entorno** (`cypress.config.js env`) para no exponer credenciales hardcodeadas repetidas en cada step.
+- **Datos como variables de entorno** (`cypress.config.ts env`) para no exponer credenciales hardcodeadas repetidas en cada step.
 
 
 ## Caso funcional implementado en el PDF
