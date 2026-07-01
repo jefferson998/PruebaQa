@@ -7,3 +7,8 @@ cypress/screenshots/
 cypress/downloads/
 .DS_Store
 cypress.env.json
+allure-results/
+allure-report/
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
