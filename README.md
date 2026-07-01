@@ -94,3 +94,8 @@ Los resultados crudos se guardan en `allure-results/` y el reporte HTML en `allu
 ## Reporte de Automatización
 
 [Reporte Allure](https://jefferson998.github.io/PruebaQa/allure-report/)
+
+Imagenes de Reporte Allure
+![Reporte Allure](./allure-report.png)
+![Reporte Allure](./allure-report-2.png)
+![Reporte Allure](./allure-report-3.png)
