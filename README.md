@@ -89,3 +89,8 @@ Los resultados crudos se guardan en `allure-results/` y el reporte HTML en `allu
 ## Caso funcional implementado en el PDF
 
 [Caso funcional.pdf](./Caso%20funcional.pdf)
+
+
+## Reporte de Automatización
+
+[Reporte Allure](https://jefferson998.github.io/PruebaQa/allure-report/)

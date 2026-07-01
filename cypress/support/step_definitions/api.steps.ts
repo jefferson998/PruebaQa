@@ -58,7 +58,7 @@ When(
       failOnStatusCode: false,
     }).then((response) => {
       logResponse(response);
-      cy.wrap(response).as("response");
+      cy.wrap(response).as("getResponse");
     });
   }
 );
@@ -81,13 +81,13 @@ When(
       failOnStatusCode: false,
     }).then((response) => {
       logResponse(response);
-      cy.wrap(response).as("response");
+      cy.wrap(response).as("getResponse");
     });
   }
 );
 
 When("se realiza una peticion GET al usuario recien creado", () => {
-  cy.get("@response").then((response: any) => {
+  cy.get("@getResponse").then((response: any) => {
     const userId = response.body.data.id || response.body.id;
     const projectId = Cypress.env("reqresProjectId");
     const url = `${baseUrl()}/collections/users/records/${userId}?project_id=${projectId}`;
@@ -126,14 +126,13 @@ When("se realiza una peticion GET al endpoint {string}", (endpoint: string) => {
 });
 
 Then("el codigo de respuesta debe ser {int}", (statusCode: number) => {
-  const alias = (this as any).getResponse ? "@getResponse" : "@response";
-  cy.get(alias).its("status").should("eq", statusCode);
+  cy.get("@getResponse").its("status").should("eq", statusCode);
 });
 
 Then(
   "la respuesta contiene el {string} igual a {string} y el {string} igual a {string}",
   (field1: string, value1: string, field2: string, value2: string) => {
-    cy.get("@response").then((response: any) => {
+    cy.get("@getResponse").then((response: any) => {
       const data = response.body.data.data || response.body.data || response.body;
       expect(data[field1]).to.eq(value1);
       expect(data[field2]).to.eq(value2);
@@ -144,7 +143,7 @@ Then(
 Then(
   "la respuesta contiene un {string} y una fecha de creacion {string}",
   (idField: string, createdAtField: string) => {
-    cy.get("@response").then((response: any) => {
+    cy.get("@getResponse").then((response: any) => {
       const data = response.body.data || response.body;
       expect(data).to.have.property(idField);
       if (data.hasOwnProperty(createdAtField)) {
@@ -168,7 +167,7 @@ Then(
 );
 
 When("se realiza una peticion DELETE al usuario recien creado", () => {
-  cy.get("@response").then((response: any) => {
+  cy.get("@getResponse").then((response: any) => {
     const userId = response.body.id;
     const projectId = Cypress.env("reqresProjectId");
     const url = `${baseUrl()}/collections/users/records/${userId}?project_id=${projectId}`;
@@ -204,13 +203,13 @@ When(
       failOnStatusCode: false,
     }).then((response) => {
       logResponse(response);
-      cy.wrap(response).as("response");
+      cy.wrap(response).as("getResponse");
     });
   }
 );
 
 When("se realiza una peticion PUT al usuario recien creado con nombre {string} y cargo {string}", (name: string, job: string) => {
-  cy.get("@response").then((response: any) => {
+  cy.get("@getResponse").then((response: any) => {
     const userId = response.body.id;
     const projectId = Cypress.env("reqresProjectId");
     const url = `${baseUrl()}/collections/users/records/${userId}?project_id=${projectId}`;
