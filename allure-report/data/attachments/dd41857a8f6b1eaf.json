@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": "0e9ec5ef-4eb4-4063-a16c-3a752a765c9a",
+    "collection_id": "1727d01a-0f3b-4cc9-9aae-f28d26549085",
+    "project_id": 33926,
+    "app_user_id": null,
+    "created_by": 127594,
+    "created_at": "2026-07-01T10:57:48.445Z",
+    "updated_at": "2026-07-01T10:57:48.445Z",
+    "deleted_at": null,
+    "data": {
+      "job": "QA",
+      "name": "Usuario Temporal"
+    }
+  }
+}

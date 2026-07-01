@@ -1,0 +1,11 @@
+{
+  "error": "record_not_found",
+  "message": "Record not found.",
+  "hint": "Verify the record ID and collection slug.",
+  "next_steps": [
+    "List records: GET /api/collections/:slug/records",
+    "Check the record ID is a valid UUID",
+    "Ensure the record hasn't been deleted"
+  ],
+  "docs_url": "https://app.reqres.in/docs#records"
+}
