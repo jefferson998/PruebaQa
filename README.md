@@ -95,10 +95,13 @@ Los resultados crudos se guardan en `allure-results/` y el reporte HTML en `allu
 
 [Reporte Allure](https://jefferson998.github.io/PruebaQa/allure-report/)
 
-Imagenes de Reporte Allure
+## Imagenes de Reporte Allure
 ![Reporte Allure](./allure-report.png)
 ![Reporte Allure](./allure-report-2.png)
 ![Reporte Allure](./allure-report-3.png)
 
-Pipeline de GitHub Actions
+## Pipeline de GitHub Actions
 ![Pipeline](./Pipeline-trigger.png)
+
+## Configuración y persistencia de reqres.in api users
+![reqres.in api users](./Config-apis-reqres.png)
