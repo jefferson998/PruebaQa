@@ -19,25 +19,11 @@ const apiHeaders = (extra: Record<string, string> = {}): Record<string, string> 
 }
 
 const logRequest = (method: string, url: string, body?: any, headers?: any) => {
-  cy.allure().step(`${method} ${url}`, false);
-  cy.allure().parameter("Method", method);
-  cy.allure().parameter("URL", url);
-  if (headers) {
-    const safeHeaders = { ...headers };
-    if (safeHeaders["x-api-key"]) {
-      safeHeaders["x-api-key"] = "***REDACTED***";
-    }
-    cy.allure().parameter("Headers", JSON.stringify(safeHeaders, null, 2));
-  }
-  if (body) {
-    cy.allure().attachment("Request Body", JSON.stringify(body, null, 2), "application/json");
-  }
+  console.log(`${method} ${url}`, body, headers);
 }
 
 const logResponse = (response: any) => {
-  cy.allure().parameter("Status", response.status);
-  cy.allure().parameter("Status Text", response.statusText);
-  cy.allure().attachment("Response Body", JSON.stringify(response.body, null, 2), "application/json");
+  console.log(`Response: ${response.status}`, response.body);
 }
 
 When(
